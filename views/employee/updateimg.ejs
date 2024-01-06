@@ -1,0 +1,26 @@
+<%- include('../partials/title.ejs') %>
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <%- include('../partials/header.ejs') %>
+  <form
+    class="row g-3 m-5"
+    action="/employee/update/img/<%= id %>"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <div>
+      <label for="formFileLg" class="form-label">Upload file to update</label>
+      <input
+        class="form-control form-control-lg"
+        type="file"
+        id="inputfile"
+        name="image"
+        accept="image/*"
+        required
+      />
+    </div>
+    <div class="text-center">
+      <button class="btn btn-success w-25" type="submit">Upload</button>
+      <a href="/employee" class="btn btn-danger w-25">Cancel</a>
+    </div>
+  </form>
+</div>

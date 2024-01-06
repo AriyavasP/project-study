@@ -1,0 +1,32 @@
+<%- include("./partials/title.ejs") %>
+<div class="cover-container w-100 p-3">
+  <%- include("./partials/header.ejs") %>
+  <form class="p-5 m-5" action="/login" method="POST">
+    <div class="text-start">
+      <label for="id">ID:</label>
+      <input
+        id="id"
+        type="text"
+        class="form-control w-50 mt-3"
+        name="ID"
+        placeholder="ID"
+      />
+    </div>
+    <div class="text-start">
+      <label for="pass">PASS:</label>
+      <input
+        id="pass"
+        type="password"
+        class="form-control w-50 mt-3"
+        name="PASS"
+        placeholder="PASSWORD"
+      />
+      <% if (!ms_pass) { %>
+      <div class="alert alert-danger" role="alert">PASSWORD OR ID WONG !</div>
+      <% } %>
+      <div>
+        <input type="submit" class="btn btn-success text-center mt-3" />
+      </div>
+    </div>
+  </form>
+</div>

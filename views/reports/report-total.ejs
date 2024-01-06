@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="../styles/reports.css" rel="stylesheet" />
+  </head>
+  <body class="head">
+    <div>
+      <h1><%= Title %></h1>
+    </div>
+    <div>
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+    <input
+      class="btn-outline-white"
+      id="income_1"
+      value="<%= sum2 %>"
+      disabled
+    />
+    <input
+      class="btn-outline-white"
+      id="income_2"
+      value="<%= sum1 %>"
+      disabled
+    />
+    <input
+      class="btn-outline-white"
+      id="income_3"
+      value="<%= sum0 %>"
+      disabled
+    />
+    <div>
+      <table class="head">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>โต๊ะ</th>
+            <th class="fix-col">รายการเมนู</th>
+            <th>รายได้</th>
+            <th>เวลา</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.forEach(user => { %><% if(user.income > 0) { %>
+          <tr>
+            <th scope="row"><%= user.id_income %></th>
+            <td><%= user.table_id %></td>
+            <td><%= user.income_item %></td>
+            <td><%= user.income %></td>
+            <td><%= user.timecheck %></td>
+          </tr>
+          <% }}) %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
+
+<script>
+  {
+    const getIncome_1 = document.getElementById("income_1");
+    const getIncome_2 = document.getElementById("income_2");
+    const getIncome_3 = document.getElementById("income_3");
+
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    var date = new Date();
+    var date_mon = date.getMonth();
+    const ctx = document.getElementById("myChart").getContext("2d");
+
+    const myChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [months[date_mon - 2], months[date_mon - 1], months[date_mon]],
+        datasets: [
+          {
+            label: "รายได้ต่อเดือน",
+            data: [getIncome_1.value, getIncome_2.value, getIncome_3.value],
+            fill: false,
+            borderColor: "rgb(75, 192, 192)",
+            tension: 0.1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  }
+</script>

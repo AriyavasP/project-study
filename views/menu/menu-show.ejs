@@ -1,0 +1,69 @@
+<%- include('../partials/title.ejs') %>
+<div class="cover-container w-100 p-3">
+  <%- include('../partials/header.ejs') %>
+  <style>
+    .input0 {
+      opacity: 0;
+    }
+  </style>
+  <!-- search -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <main class="text-dark mx-auto container text-center">
+    <input class="filter" placeholder="ค้นหา" />
+    <div class="row align-items-start">
+      <% menushow.forEach(menu => { %>
+      <div class="col">
+        <form class="pt-5" method="post" action="/menu/menu-show">
+          <div
+            class="card"
+            style="width: 18rem"
+            data-string="<%= menu.menu_name %>"
+          >
+            <img src="../images/<%= menu.menu_image %>" class="card-img-top" style="height: 12rem" />
+
+            <input name="getid" class="input0" value="<%= menu.id_menu %>" />
+
+            <div class="card-body">
+              <h5 class="card-title">ชื่อ: <%= menu.menu_name %></h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">ราคา: <%= menu.menu_price %></li>
+
+              <input
+                class="form-control w-100 mt-3 text-center"
+                type="number"
+                name="edit_price"
+                placeholder="ใส่ราคาใหม่"
+              />
+              <!-- <a  href="/menu/menu-show/edit-price/<%= menu.id_menu %> " class="card-link px-3">save</a> -->
+
+              <button class="btn btn-primary me-md-2">save</button>
+            </ul>
+            <div class="card-body">
+              <a
+                href="/menu/menu-show/delete/<%= menu.id_menu %> "
+                class="card-link px-3"
+                >Delete</a
+              >
+            </div>
+          </div>
+        </form>
+      </div>
+      <% }) %>
+    </div>
+  </main>
+</div>
+<script>
+  $(".filter").on("keyup", function () {
+    var input = $(this).val().toUpperCase();
+
+    $(".card").each(function () {
+      if ($(this).data("string").toUpperCase().indexOf(input) < 0) {
+        $(this).hide();
+      } else {
+        $(this).show();
+      }
+    });
+  });
+</script>

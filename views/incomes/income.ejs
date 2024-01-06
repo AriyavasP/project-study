@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= Title %></title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="../styles/incomes.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <%- include('../partials/header.ejs') %> <% if (sum0 > 0 || sum1 > 0 ||
+    sum2> 0) { %>
+    <div>
+      <p class="">รายรับย้อนหลัง 3 เดือน</p>
+      <input class="btn" id="income_1" value="<%= sum2 %>" disabled />
+      <input class="btn" id="income_2" value="<%= sum1 %>" disabled />
+      <input class="btn" id="income_3" value="<%= sum0 %>" disabled />
+    </div>
+    <div>
+      <p>รายจ่ายย้อนหลัง 3 เดือน</p>
+      <input type="number" class="btn" id="outcome_1" value="" required />
+      <input type="number" class="btn" id="outcome_2" value="" required />
+      <input
+        type="number"
+        class="btn"
+        id="outcome_3"
+        onchange="inputText()"
+        value=""
+        required
+      /><br />
+    </div>
+    <div>
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+    <div class="m-5" style="border: 1px solid #000; border-radius: 20px">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">โต๊ะ</th>
+            <th scope="col">รายการเมนู</th>
+            <th scope="col">รายได้</th>
+            <th scope="col">เวลา</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.forEach(user => { %> <% if(user.income > 0) { %>
+          <tr>
+            <th scope="row"><%= user.id_income %></th>
+            <td><%= user.table_id %></td>
+            <td><%= user.income_item %></td>
+            <td><%= user.income %></td>
+            <td><%= user.timecheck %></td>
+          </tr>
+          <% }}) %>
+        </tbody>
+      </table>
+    </div>
+    <% } else { %>
+    <h1>NO_DATA</h1>
+    <% } %>
+  </body>
+</html>
+
+<script>
+  function inputText() {
+    let getoutcome_1 = document.getElementById("outcome_1");
+    let getoutcome_2 = document.getElementById("outcome_2");
+    let getoutcome_3 = document.getElementById("outcome_3");
+    const getIncome_1 = document.getElementById("income_1");
+    const getIncome_2 = document.getElementById("income_2");
+    const getIncome_3 = document.getElementById("income_3");
+
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    var date = new Date();
+    var date_mon = date.getMonth();
+    const ctx = document.getElementById("myChart").getContext("2d");
+
+    const myChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [months[date_mon - 2], months[date_mon - 1], months[date_mon]],
+        datasets: [
+          {
+            label: "รายได้ต่อเดือน",
+            data: [getIncome_1.value, getIncome_2.value, getIncome_3.value],
+            fill: false,
+            borderColor: "rgb(75, 192, 192)",
+            tension: 0.1,
+          },
+          {
+            label: "รายจ่ายต่อเดือน",
+            data: [getoutcome_1.value, getoutcome_2.value, getoutcome_3.value],
+            fill: false,
+            borderColor: "rgb(220, 20, 60)",
+            tension: 0.1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  }
+</script>

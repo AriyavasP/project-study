@@ -1,0 +1,41 @@
+<%- include('../partials/title.ejs') %>
+<div class="cover-container w-100 p-3">
+  <%- include('../partials/header.ejs') %>
+  <main>
+    <form
+      action="/employee/view/create/submit/<%= id %>"
+      method="POST"
+      class="mx-auto"
+    >
+      <div class="w-50 text-start px-3 mt-2">
+        <label>NEW PASSWORD</label>
+        <input
+          class="form-control w-75 mt-3"
+          type="password"
+          name="password"
+          placeholder="@099812"
+          value=""
+        />
+      </div>
+      <div class="w-50 text-start px-3 mt-2">
+        <label>CONFIRMPASSWORD</label>
+        <input
+          class="form-control w-75 mt-3"
+          type="password"
+          name="confirmpassword"
+          placeholder="@099812"
+          value=""
+        />
+        <% if (!ms_pass) { %>
+          <div class="w-75 alert alert-danger" role="alert">
+            PASSWORD IS NOT CURRENT !
+          </div>
+        <% } %>
+      </div>
+      <div class="w-50 text-start px-5 mt-4 mx-5">
+        <input type="submit" class="form-control w-25 btn btn-primary" value="ยืนยัน" />
+        <a class="btn btn-primary w-25" href="/employee">ยกเลิก</a>
+      </div>
+    </form>
+  </main>
+</div>

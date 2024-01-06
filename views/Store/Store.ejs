@@ -1,0 +1,76 @@
+<%- include('../partials/title.ejs') %>
+<div class="w-100 p-3 mx-auto">
+  <%- include('../partials/header.ejs') %>
+  <main class="px-3 d-flex text-center">
+    <form
+      action="/admin/add-item/submit"
+      method="POST"
+      class="w-50 align-items-center"
+    >
+      <p class="text-start mx-4">รายชื่อสินค้า</p>
+      <input
+        name="name"
+        type="text"
+        class="form-control mx-4 w-50"
+        aria-label="Sizing example input"
+        placeholder="รายชื่อสินค้า"
+        value=""
+        required
+      />
+      <p class="text-start mx-4">ประเภท</p>
+      <select
+        name="type"
+        class="form-select mx-4 w-25"
+        aria-label="Default select example"
+      >
+        <option selected>ประเภท</option>
+        <option value="ปลาทะเล">ปลาทะเล (g.)</option>
+        <option value="ปลาแม่น้ำ">ปลาแม่น้ำ (g.)</option>
+        <option value="หอยทะเล">หอยทะเล (g.)</option>
+        <option value="หอยแม่น้ำ">หอยแม่น้ำ (g.)</option>
+        <option value="หมึกทะเล">หมึกทะเล (g.)</option>
+        <option value="เนื้อสัตว์">เนื้อสัตว์ (g.)</option>
+        <option value="วัตถุดิบ">วัตถุดิบ (g.)</option>
+        <option value="เครื่องดื่ม">เครื่องดื่ม (ea.)</option>
+        <option value="สิ่งของทั่วไป">สิ่งของทั่วไป (ea.)</option>
+      </select>
+      <p class="text-start mx-4">จำนวน</p>
+      <input
+        name="quantity"
+        type="number"
+        class="form-control mx-4 w-25"
+        aria-label="Sizing example input"
+        placeholder="จำนวน"
+        value=""
+        required
+      />
+      <p class="lead w-50">
+        <input
+          type="submit"
+          class="btn btn-lg btn-primary fw-bold bg-gradient mt-5"
+          value="ยืนยัน"
+        />
+      </p>
+    </form>
+    <form class="bg-dark form-control w-50 mx-auto">
+      <table class="table text-light">
+        <thead>
+          <tr>
+            <th scope="col">ชื่อ</th>
+            <th scope="col">ประเภท</th>
+            <th scope="col">จำนวน</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.forEach(user => { %>
+          <tr>
+            <th scope="row"><%= user.name%></th>
+            <td><%= user.type%></td>
+            <td><%= user.quantity%></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </form>
+  </main>
+</div>

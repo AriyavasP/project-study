@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= Title %> </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<!-- cart icon -->
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">  
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/lib/bootstrap.min.css">
+  <script src="/lib/jquery-1.12.2.min.js"></script>
+  <script src="/lib/bootstrap.min.js"></script>
+  <style>
+     .card.product .btn {
+  bottom: 1.5rem;
+  max-width: 80%;
+}
+
+.price {
+  font-size: 1.75rem;
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    margin-bottom: 2rem;
+  }
+}
+.bg-head{
+  background-image: url("https://img.wongnai.com/p/1920x0/2015/09/26/8e748f0ec2fa4171806e2d340d4bdb60.jpg");
+}
+body{
+  background-image: url("http://img.painaidii.com/images/20210302_38980_1614669928_118505.jpg");
+}
+h2{
+  color: beige;
+}
+.cart_in{
+  color: rgb(187, 8, 187);
+  font-size: 2rem;
+}
+.card-titlei{
+  opacity: 0;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="bg-head">
+    <h2 class="text-center">วิวดียินดีต้อนรับ</h2> 
+    <h2 class="text-center">โต๊ะที่ <%= table_id %> </h2>
+    
+    </div>
+      <div class="text-right">
+      <a href="/order/carts/<%= table_id %>" type="button" class="btn btn-primary bi bi-cart">
+        <span class="badge" id="cart_in" data-test="<%= cartIcon.length %>"><%= cartIcon.length %> </span>
+      </a>
+      </div> 
+    <!-- หัวประเภท -->
+    <ul class="nav nav-tabs">
+      <!-- <li class="active"><a href="#ของคาว">คาว</a></li> -->
+      <% for(var count=0;count < ingre_type.length;count++) { %> 
+             <li><a href="#<%= ingre_type[count].type_name%>"><%= ingre_type[count].type_name%></a></li>
+      <% } %> 
+    </ul>
+    <!-- แต่ละหน้า -->
+        <div class="tab-content">
+            <% for(var Icount=0;Icount < ingre_type.length;Icount++) { %>
+                <div id="<%= ingre_type[Icount].type_name%>" class="tab-pane fade in active">
+                    <h3><%= ingre_type[Icount].type_name%></h3>
+                      <div class="col pt-5">
+                        <% for(var count=0;count < data.length;count++) { %>
+                          <% if(data[count].menu_type_id == ingre_type[Icount].menu_type_id) { %> 
+                            <form action="/order/table/<%= table_id %>" method="post">
+                              <div class="row px-5 pt-5">
+                                <div class="col-md-4 mt-4 mt-sm-0 card-container">
+                                  <div class="card text-center product p-4 pt-5 border-0 h-100 rounded-0">
+                                    <img class="img-fluid d-block mx-auto" src="../../images/<%= data[count].menu_image  %> " alt="Responsive image">
+                                    <div class="card-body p-4 py-0 h-xs-440p">
+                                      <input class="card-titlei" name="menu_oreder_name" value="<%=(data[count].menu_name)%>"></input>
+                                      <input class="card-titlei" name="table_id" value="<%= table_id %>"></input>
+                                      <h3 class="card-title font-weight-semi-bold  w-xl-220p mx-auto"><%=data[count].menu_name%></h3>
+                                      <input class="card-titlei" name="menu_oreder_price" value="<%=data[count].menu_price%>"></input>
+                                      <p class="price">ราคา: <%=data[count].menu_price%></p>                                   
+                                    </div>
+                                    <p class="btn w-100 px-4 mx-auto">
+                                      <input type="submit" class="btn btn-dark btn-lg w-100" name="add-cart" value="Add to cart" onclick="count_cart()">
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          <% } %> 
+                        <% } %> 
+                      </div>
+                </div>
+            <% } %>
+                <!-- <div id="อาหารทะเล" class="tab-pane fade">
+                <h3>อาหารทะเล</h3>
+                  <div class="col pt-5">
+                    <% for(var count=0;count < data.length;count++) { %>
+                      <% if(data[count].menu_type_id == 2) { %> 
+                        <form action="/order/table" method="post">
+                          <div class="row px-5 pt-5">
+                            <div class="col-md-4 mt-4 mt-sm-0 card-container">
+                              <div class="card text-center product p-4 pt-5 border-0 h-100 rounded-0">
+                                <img class="img-fluid d-block mx-auto" src="../images/<%= data[count].menu_image%>" alt="Responsive image">
+                                <div class="card-body p-4 py-0 h-xs-440p">
+                                  <input class="card-titlei" name="menu_oreder_name" value="<%=(data[count].menu_name)%>"></input>
+                                  <h5 class="card-title font-weight-semi-bold mb-3 w-xl-220p mx-auto">ชื่อ: <%=data[count].menu_name%></h5>
+                                  <p class="price">ราคา: <%=data[count].menu_price%></p>
+                                </div>
+                                <p class="btn w-100 px-4 mx-auto">
+                                  <input type="submit" class="btn btn-dark btn-lg w-100" name="add-cart" value="Add to cart" onclick="count_cart()">
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      <% } %> 
+                    <% } %> 
+                  </div>
+                </div>
+                <div id="ของหวาน" class="tab-pane fade">
+                <h3>ของหวาน</h3>
+                  <div class="col pt-5">
+                    <% for(var count=0;count < data.length;count++) { %>
+                      <% if(data[count].menu_type_id == 3) { %> 
+
+                        <div class="row px-5 pt-5">
+                          <div class="col-md-4 mt-4 mt-sm-0 card-container">
+                            <div class="card text-center product p-4 pt-5 border-0 h-100 rounded-0">
+                              <img class="img-fluid d-block mx-auto" src="../images/<%= data[count].menu_image%>" alt="Responsive image">
+                              <div class="card-body p-4 py-0 h-xs-440p">
+                                <h5 class="card-title font-weight-semi-bold mb-3 w-xl-220p mx-auto">ชื่อ: <%=data[count].menu_name%></h5>
+                                <p class="price">ราคา: <%=data[count].menu_price%></p>
+                              </div>
+                              <p class="btn w-100 px-4 mx-auto">
+                                <input type="submit" class="btn btn-dark btn-lg w-100" name="add-cart" value="Add to cart" onclick="count_cart()">
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      <% } %> 
+                    <% } %> 
+                  </div>
+                </div>
+                <div id="เครื่องดื่ม" class="tab-pane fade">
+                <h3>เครื่องดื่ม</h3>
+                <div class="col pt-5">
+                  <% for(var count=0;count < data.length;count++) { %>
+                    <% if(data[count].menu_type_id == 4) { %> 
+
+                      <div class="row px-5 pt-5">
+                        <div class="col-md-4 mt-4 mt-sm-0 card-container">
+                          <div class="card text-center product p-4 pt-5 border-0 h-100 rounded-0">
+                            <img class="img-fluid d-block mx-auto" src="../images/<%= data[count].menu_image%>" alt="Responsive image">
+                            <div class="card-body p-4 py-0 h-xs-440p">
+                              <h5 class="card-title font-weight-semi-bold mb-3 w-xl-220p mx-auto">ชื่อ: <%=data[count].menu_name%></h5>
+                              <p class="price">ราคา: <%=data[count].menu_price%></p>
+                            </div>
+                            <p class="btn w-100 px-4 mx-auto">
+                              <input type="submit" class="btn btn-dark btn-lg w-100" name="add-cart" value="Add to cart" id="cart_count" onclick="count_cart()">
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    <% } %> 
+                  <% } %> 
+                </div>
+                </div> -->
+        </div>
+  
+  </div>
+
+<script>
+  $(document).ready(function(){
+      $(".nav-tabs a").click(function(){
+          $(this).tab('show');
+      });
+  });
+  
+  var i = "<%= cartIcon.length %>"
+  var a= parseInt(i)
+  function count_cart() {
+    
+     a=a+1
+     const cart_in_change = document.getElementById("cart_in");
+     cart_in_change.textContent =a;
+  }
+  
+  /*const cart_in_change = document.getElementById("cart_in");
+  cart_in_change.textContent = c_cart; */
+  
+</script>
+
+</body>
+</html>

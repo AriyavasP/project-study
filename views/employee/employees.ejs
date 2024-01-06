@@ -1,0 +1,119 @@
+<%- include('../partials/title.ejs') %>
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <%- include('../partials/header.ejs') %>
+  <main class="px-3 w-50 text-start">
+    <form
+      class="row g-3"
+      action="/employee/add-employees/submit"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <div class="col-md-6">
+        <label for="firstname" class="form-label">ชื่อ</label>
+        <input
+          name="firstname"
+          type="text"
+          class="form-control"
+          id="firstname"
+          placeholder="ชื่อ"
+          value=""
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="lastname" class="form-label">นามสกุล</label>
+        <input
+          name="lastname"
+          type="text"
+          class="form-control"
+          id="lastname"
+          placeholder="นามสกุล"
+          value=""
+        />
+      </div>
+      <div class="col-12">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gender"
+            id="male"
+            value="ชาย"
+          />
+          <label class="form-check-label" for="male">ชาย</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gender"
+            id="female"
+            value="หญิง"
+          />
+          <label class="form-check-label" for="female">หญิง</label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="id" class="form-label">เลขบัตรประชาชน</label>
+        <input
+          name="id"
+          type="text"
+          class="form-control"
+          id="id"
+          placeholder="เลขบัตรประชาชน"
+          value=""
+          maxlength="13"
+          required
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="inputtel" class="form-label">เบอร์โทรติดต่อ</label>
+        <input
+          name="number"
+          type="tel"
+          class="form-control w-75"
+          id="inputtel"
+          placeholder="เบอร์โทร"
+          maxlength="10"
+          value=""
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="inputemail" class="form-label">อีเมล</label>
+        <input
+          name="email"
+          type="email"
+          class="form-control"
+          id="inputemail"
+          placeholder="อีเมล"
+          value=""
+        />
+      </div>
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">ที่อยู่</label>
+        <textarea
+          name="address"
+          type="text"
+          class="form-control"
+          id="inputAddress"
+          placeholder="ที่อยู่"
+          style="height: 100px"
+          required
+        ></textarea>
+      </div>
+      <div class="input-group mb-3">
+        <input
+          type="file"
+          class="form-control"
+          id="inputfile"
+          name="image"
+          accept="image/*"
+          required
+        />
+        <label class="input-group-text" for="inputfile">อัพโหลด</label>
+      </div>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary">ยืนยัน</button>
+      </div>
+    </form>
+  </main>
+</div>

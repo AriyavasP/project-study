@@ -1,0 +1,57 @@
+<%- include('../partials/title.ejs') %>
+  <div class="w-100 p-3 mx-auto">
+    <%- include('../partials/header.ejs') %>
+    <h1>เพิ่มเมนูอาหาร</h1>
+    <main class="px-3 d-flex text-center">
+
+        <form action="/menu/add-menu" method="POST" class="w-50 align-items-center" enctype="multipart/form-data">
+            <p class="text-start mx-4">ชื่อเมนูอาหาร</p>
+            <input name="menu_name" type="text" class="form-control mx-4 w-50 mb-3" aria-label="Sizing example input" placeholder="ชื่อเมนู" value="" required>
+
+            <p class="text-start mx-4">รูปภาพอาหาร</p>
+            <div class="input-group mb-3">
+                &emsp;&thinsp;&thinsp;   <input type="file" class="form-control" id="inputfile" name="image" accept="image/*" required>
+                <label class="input-group-text" for="inputfile">อัพโหลด</label>
+              </div>
+
+            <p class="text-start mx-4">ประเภทอาหาร</p>
+            <select name="menu_type" class="form-select mx-4 w-25 mb-3" aria-label="Default select example">
+                <option value="">เลือกประเภทอาหาร</option>
+                <% for(var count=0;count < data.length;count++) { %>
+                    <option value="<%= data[count].menu_type_id %>"><%= data[count].type_name %></option>
+                <% } %>  
+            </select>
+            
+            <p class="text-start mx-4">ราคาอาหาร</p>
+            <input name="menu_price" type="number" class="form-control mx-4 w-50 mb-3" aria-label="Sizing example input" placeholder="ราคา" value="" required>
+            <p class="text-start mx-4">วัตถุดิบ</p>
+            <!-- <p class="text-start mx-4">จำนวน</p>
+            <input name="ingre_number" type="number" class="form-control mx-4 w-25 mb-3" aria-label="Sizing example input"value=""> -->
+            <% for(var i =0;i<20;i++) { %> 
+
+                <select name="ingre_name[]" id="ingre_name"class="form-control mx-4 w-25 " aria-label="Default select example">
+                    <option value=''>เลือกวัตถุดิบ</option>
+                    <% for(var count=0;count < ingreData.length;count++) { %>
+                        <option value=<%= ingreData[count].name %>><%= ingreData[count].name %></option>
+                    <% } %>  
+                </select>
+                <p>ปริมาณ</p>
+                <input name="ingre_number[]" type="number" class=" w-25 mb-5" placeholder="จำนวน" aria-label="Sizing example input"value="">
+            <% } %>
+
+             
+            <p class="lead w-50">
+                <input type="submit" onclick="myFunction()" value="Submit" class="btn btn-lg btn-secondary fw-bold border-white bg-gradient mt-5">
+              </p>
+
+        </form>
+    </main>
+</div>
+<script>
+    function myFunction() {
+     alert("เพิ่มเมนูเรียบร้อย!!");
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<%- include('../partials/title.ejs') %>
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <%- include('../partials/header.ejs') %>
+  <main class="text-bg-dark">
+    <table class="table text-light">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Raw Material</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Price</th>
+          <th scope="col">Status</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% data.forEach(user => { %> <% if (user.status == "W") { %>
+          <th scope="row"><%= user.id_order %></th>
+          <th><%= user.name %></th>
+          <th style="width: 35%">
+            <% for (let i = 0; i < user.raw_material.length ; i++) { %> <%=
+            user.raw_material[i] %> <% if (i % 5 == 4) { %>
+            <br />
+            <% }} %>
+          </th>
+          <th><%= user.amount %></th>
+          <th><%= user.price %></th>
+          <th><%= user.status %></th>
+          <th>
+            <a
+              href="/kitchen/update-S/<%=user.id_order%>"
+              class="btn btn-success"
+              >Accept</a
+            >
+            <a
+              href="/kitchen/update-F/<%=user.id_order%>"
+              class="btn btn-danger"
+              >Cnacel</a
+            >
+          </th>
+        </tr>
+        <% }}) %>
+      </tbody>
+    </table>
+  </main>
+</div>
+
+<script>
+  setTimeout(function () {
+    location.reload();
+  }, 600000);
+</script>

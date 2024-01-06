@@ -1,0 +1,35 @@
+<%- include('../partials/title.ejs') %>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <%- include('../partials/header.ejs') %>
+    <h1>เช็คโต๊ะ</h1>
+        <main class="text-bg-dark">
+            <table class="table text-light">
+            <thead>
+                <tr>
+                <th scope="col">โต๊ะที่</th>
+                <th scope="col">ของที่สั่ง</th>
+                <th scope="col">รวมค่าอาหาร</th>
+                <th scope="col">สถานะโต๊ะ</th>
+                <th scope="col">change status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <% data.forEach(function(data){ %>                
+                <th scope="row"><%= data.table_id %></th>
+                <td><%= data.table_item%></td>
+                <td><%= data.table_total_price%></td>
+                <td><%= data.table_status%></td>
+                <td>   
+                    <a class="btn btn-primary" href="/menu/table-show/updatestatusin/<%= data.table_id %>" role="button">in</a>
+                    <a class="btn btn-danger" href="/menu/table-show/updatestatusout/<%= data.table_id %>" role="button">out</a>                   
+                </td>
+                </tr>
+                <% });%>
+            </tbody>
+            </table>
+        </main>
+    </div>
+
+  </body>
+</html>

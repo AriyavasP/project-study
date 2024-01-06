@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=Title%></title>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <%- include("./partials/title-home.ejs") %>
+    <div class="mt-5 text-center">
+        <h1>TABLE ZONE</h1>
+    </div>
+    <div>
+      <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a
+            class="nav-link active"
+            id="ZoneA-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#ZoneA"
+            type="button"
+            role="tab"
+            aria-controls="ZoneA"
+            aria-selected="true"
+            >Zone A</a
+          >
+        </li>
+        <li class="nav-item" role="presentation">
+          <a
+            class="nav-link"
+            id="ZoneB-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#ZoneB"
+            type="button"
+            role="tab"
+            aria-controls="ZoneB"
+            aria-selected="false"
+            >Zone B</a
+          >
+        </li>
+        <li class="nav-item" role="presentation">
+          <a
+            class="nav-link"
+            id="ZoneC-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#ZoneC"
+            type="button"
+            role="tab"
+            aria-controls="ZoneC"
+            aria-selected="false"
+            >Zone C</a
+          >
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link disabled">Cafe</a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content m-5" id="myTabContent">
+        <div class="tab-pane fade show active" id="ZoneA" role="tabpanel" aria-labelledby="ZoneA-tab">
+            <div class="card card-body">
+                <p>
+                  <% data.forEach(user => { %> <% if (user.id_table <= 20) { %>
+                   <span class="h-25 float-start p-1"> <a href="/table/<%= user.id_table %>" class="btn btn-success<% if (user.status == "in") { %> btn-danger <% } %>">โต๊ะ : <%=user.id_table%></a></span>
+                  <% } %> <% }) %>
+                </p>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="ZoneB" role="tabpanel" aria-labelledby="ZoneB-tab">
+            <div class="card card-body">
+                <p>
+                  <% data.forEach(user => { %> <% if (user.id_table >= 21 && user.id_table <= 40) { %>
+                   <span class="h-25 float-start p-1"><a href="/table/<%= user.id_table %>" class="btn btn-success<% if (user.status == "in") { %> btn-danger <% } %>">โต๊ะ : <%=user.id_table%></a></span>
+                  <% } %> <% }) %>
+                </p>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="ZoneC" role="tabpanel" aria-labelledby="ZoneC-tab">
+            <div class="card card-body">
+                <p>
+                  <% data.forEach(user => { %> <% if (user.id_table >= 41) { %>
+                   <span class="h-25 float-start p-1"> <a href="/table/<%= user.id_table %>" class="btn btn-success<% if (user.status == "in") { %> btn-danger <% } %>">โต๊ะ : <%=user.id_table%></a></span>
+                  <% } %> <% }) %>
+                </p>
+            </div>
+        </div>
+      </div>
+      <div class="m-5">    
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                    <span class="mb-3 mb-md-0 text-muted">© 2022 Company, Inc</span>
+                </div>
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                    <li class="ms-3"><a class="text-muted" href="https://www.facebook.com/ViewdeeAngsila"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                      </svg></a></li>
+                </ul>
+            </footer>
+      </div>
+  </body>
+</html>

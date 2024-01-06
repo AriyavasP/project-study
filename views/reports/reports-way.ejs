@@ -1,0 +1,95 @@
+<%- include('../partials/title.ejs') %>
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <%- include('../partials/header.ejs') %>
+  <div>
+    <form
+      class="d-grid gap-2 col-6 mx-auto mt-3"
+      action="/reports/store"
+      method="POST"
+    >
+      <input class="btn btn-primary" type="submit" value="รายงานของ Store" />
+    </form>
+    <form
+      class="d-grid gap-2 col-6 mx-auto mt-3"
+      action="/reports/employee"
+      method="POST"
+    >
+      <input class="btn btn-primary" type="submit" value="รายงานของ Employee" />
+    </form>
+    <form class="d-grid gap-2 col-6 mx-auto mt-3" action="/reports/income" method="POST">
+      <input
+        class="btn btn-primary"
+        type="submit"
+        value="รายงานของ Total income"
+      />
+    </form>
+    <div class="d-grid gap-2 col-6 mx-auto mt-3">
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+      >
+        รายงานของ Employee Add Store
+      </button>
+
+      <!-- Modal -->
+      <form action="/reports/employee-add-store/" method="POST">
+        <div
+          class="modal fade"
+          id="staticBackdrop"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog text-dark">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">
+                  เลือกพนักงาน ID
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <% data.forEach(user => { %>
+                <form action="/reports/employee-add-store" method="POST">
+                  <div id="list-example" class="list-group">
+                    <button
+                      class="list-group-item list-group-item-action"
+                      type="submit"
+                      name="id"
+                      value="<%= user.id_employee %>"
+                    >
+                      <%= user.id_employee %>
+                    </button>
+                  </div>
+                </form>
+                <% }) %>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  Understood
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

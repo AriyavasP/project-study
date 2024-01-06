@@ -1,0 +1,22 @@
+<%- include('../partials/title.ejs') %>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <%- include('../partials/header.ejs') %>
+            <h1>จัดการคิว</h1>
+            <div class="text-right">
+                <h5>จำนวนคิว : <%= data.length %>
+                </h5>
+            </div>
+            <main class="text-bg-dark">
+                <% for(var i=0; i<data.length;i++) { %>
+                    <div class="input-group mb-3 mx-auto w-50">
+                        <input class="form-control" type="text" value="คิวที่ <%= i+1 %> &nbsp;&nbsp;&nbsp;
+                    <%= data[i].cus_name %> &nbsp;&nbsp;&nbsp; <%= data[i].cus_tel %>"
+                            aria-label="readonly input example" readonly>
+                        <a href="/queue/queue-mng/delete/<%= data[i].queue_id %>" class="btn btn-danger">ลบคิว</a>
+                    </div>
+                    <% } %>
+            </main>
+    </div>
+    </body>
+
+    </html>

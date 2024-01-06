@@ -1,0 +1,77 @@
+<nav class="navbar navbar-light">
+  <div class="container-fluid shadow-sm">
+    <a class="navbar-brand" style="font-size: 1.7rem">
+      <img
+        src="https://scontent.fbkk10-1.fna.fbcdn.net/v/t39.30808-6/305774196_442505171198030_2509248209727486141_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeGsWaVynGnyI6O81ib-_nGTP5CzcBGKldc_kLNwEYqV19f8_w1ToDdxEniexoQlbktoyVEJMXnc7VOHWsgL9G8g&_nc_ohc=cO20eCKByA8AX_Sex49&_nc_ht=scontent.fbkk10-1.fna&oh=00_AfB75-O2vt0iHvS83yO5oIHQS2pMHRrKgOEUR5jJFO3P0Q&oe=6361C6EE"
+        width="57"
+        height="34"
+        class="d-inline-block align-text-top rounded-pill"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      />
+      ViewDee
+    </a>
+
+    <!-- Modal -->
+    <form action="/login" method="POST">
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">LOGIN</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="ID" class="form-label">ID</label>
+                <input
+                  name="ID"
+                  type="text"
+                  class="form-control"
+                  id="ID"
+                  placeholder="ID EMPLOYEE"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">PASSWORD</label>
+                <input
+                  name="PASS"
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="PASSWORD"
+                />
+                <% if (!ms_pass) { %>
+                <div class="alert alert-danger" role="alert">
+                  PASSWORD OR ID WONG !
+                </div>
+                <% } %>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</nav>

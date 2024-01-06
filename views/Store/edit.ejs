@@ -1,0 +1,53 @@
+<%- include('../partials/title.ejs') %>
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <%- include('../partials/header.ejs') %>
+  <main class="px-3">
+    <form
+      action="/admin/store/update"
+      method="POST"
+      class="mx-auto align-items-start"
+    >
+      <div class="text-start mx-4">
+        ID: (Editing)
+        <input
+          name="id"
+          type="text"
+          readonly
+          class="form-control-plaintext text-light"
+          value="<%= id %>"
+        />
+      </div>
+      <p class="text-start mx-4">รายชื่อสินค้า</p>
+      <input
+        name="name"
+        type="text"
+        class="form-control w-50 mx-4"
+        aria-label="Sizing example input"
+        placeholder="รายชื่อสินค้า"
+        value="<%= name %>"
+      />
+      <p class="text-start mx-4">จำนวน</p>
+      <p class="text-start mx-4">จำนวน(ของเดิม) <%= quantity %></p>
+      <input
+        name="quantity"
+        type="number"
+        class="form-control w-50 mx-4"
+        aria-label="Sizing example input"
+        placeholder="จำนวน"
+        required
+      />
+      <p class="lead w-50">
+        <input
+          type="submit"
+          class="btn btn-lg btn-secondary fw-bold border-white bg-gradient mt-5"
+          value="ยืนยัน"
+        />
+        <a
+          class="btn btn-lg btn-secondary fw-bold border-white bg-gradient mt-5"
+          href="/admin/store"
+          >ยกเลิก</a
+        >
+      </p>
+    </form>
+  </main>
+</div>

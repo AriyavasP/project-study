@@ -1,0 +1,88 @@
+<%- include('../partials/title.ejs') %>
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <%- include('../partials/header.ejs') %>
+  <main class="text-bg-dark">
+    <form action="/admin/search" method="POST">
+    <div class="input-group">
+      <select
+        class="form-select"
+        name="filter"
+        aria-label="Example select with button addon"
+      >
+        <option selected>ทั้งหมด</option>
+        <option value="ปลาทะเล">ปลาทะเล</option>
+        <option value="ปลาแม่น้ำ">ปลาแม่น้ำ</option>
+        <option value="หอยทะเล">หอยทะเล</option>
+        <option value="หอยแม่น้ำ">หอยแม่น้ำ</option>
+        <option value="หมึกทะเล">หมึกทะเล</option>
+        <option value="เนื้อสัตว์">เนื้อสัตว์</option>
+        <option value="วัตถุดิบ">วัตถุดิบ</option>
+        <option value="เครื่องดื่ม">เครื่องดื่ม</option>
+        <option value="สิ่งของทั่วไป">สิ่งของทั่วไป</option>
+      </select>
+      <button
+        class="btn btn-outline-secondary text-light"
+        type="submit"
+      >
+        Filter..
+      </button>
+    </div>
+  </form>
+    <table class="table text-light">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Type</th>
+          <th scope="col">Amount (.g)</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% data.forEach(function(user){ %> <% if (search) { 
+            if (user.type == search) { %>
+          <th scope="row"><%= user.id_item %></th>
+          <td><%= user.name %></td>
+          <td><%= user.type%></td>
+          <td><%= user.quantity%></td>
+          <td>
+            <a
+              href="/admin/store/edit/<%= user.id_item %>"
+              type="button"
+              class="btn btn-primary edit"
+              >Edit</a
+            >
+            <a
+              href="/admin/store/delete/<%= user.id_item %>"
+              type="button"
+              class="btn btn-danger"
+              >Delete</a
+            >
+          </td>
+        </tr>
+        <% } } else { %>
+          <th scope="row"><%= user.id_item %></th>
+          <td><%= user.name %></td>
+          <td><%= user.type%></td>
+          <td><%= user.quantity%></td>
+          <td>
+            <a
+              href="/admin/store/edit/<%= user.id_item %>"
+              type="button"
+              class="btn btn-primary edit"
+              >Edit</a
+            >
+            <a
+              href="/admin/store/delete/<%= user.id_item %>"
+              type="button"
+              class="btn btn-danger"
+              >Delete</a
+            >
+          </td>
+        </tr>
+        <% }}) %>
+      </tbody>
+    </table>
+  </main>
+</div>
